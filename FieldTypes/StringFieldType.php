@@ -1,0 +1,58 @@
+<?php
+
+/*
+ * This file is part of the Miky package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Miky\Component\Grid\FieldTypes;
+
+use Miky\Component\Grid\DataExtractor\DataExtractorInterface;
+use Miky\Component\Grid\Definition\Field;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+
+class StringFieldType implements FieldTypeInterface
+{
+    /**
+     * @var DataExtractorInterface
+     */
+    private $dataExtractor;
+
+    /**
+     * @param DataExtractorInterface $dataExtractor
+     */
+    public function __construct(DataExtractorInterface $dataExtractor)
+    {
+        $this->dataExtractor = $dataExtractor;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function render(Field $field, $data, array $options)
+    {
+        $value = $this->dataExtractor->get($field, $data);
+
+        return is_string($value) ? htmlspecialchars($value) : $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'string';
+    }
+}
