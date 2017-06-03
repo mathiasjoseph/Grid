@@ -73,6 +73,14 @@ class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
             $grid->addActionGroup($actionGroup);
         }
 
+        foreach ($configuration['batch_actions'] as $name => $action) {
+            $batchAction = BatchAction::fromNameAndType($name, $action['label']);
+
+                if (array_key_exists('options', $action)) {
+                    $batchAction->setOptions($action['options']);
+                }
+            $grid->addBatchAction($batchAction);
+        }
         return $grid;
     }
 }

@@ -46,6 +46,11 @@ class Grid
     /**
      * @var array
      */
+    private $batchActions = [];
+
+    /**
+     * @var array
+     */
     private $actionGroups = [];
 
     /**
@@ -173,6 +178,15 @@ class Grid
     }
 
     /**
+     * @return BatchAction[]
+     */
+    public function getBatchActions()
+    {
+        return $this->batchActions;
+    }
+
+
+    /**
      * @param ActionGroup $actionGroup
      */
     public function addActionGroup(ActionGroup $actionGroup)
@@ -187,6 +201,21 @@ class Grid
     }
 
     /**
+     * @param BatchAction $batchAction
+     */
+    public function addBatchAction(BatchAction $batchAction)
+    {
+        $name = $batchAction->getName();
+
+        if ($this->hasBatchAction($name)) {
+            throw new \InvalidArgumentException(sprintf('BatchAction "%s" already exists.', $name));
+        }
+
+        $this->batchActions[$name] = $batchAction;
+    }
+
+
+    /**
      * @param string $name
      */
     public function getActionGroup($name)
@@ -199,6 +228,18 @@ class Grid
     }
 
     /**
+     * @param string $name
+     */
+    public function getBatchAction($name)
+    {
+        if (!$this->hasBatchAction($name)) {
+            throw new \InvalidArgumentException(sprintf('BatchAction "%s" does not exist.', $name));
+        }
+
+        return $this->batchActions[$name];
+    }
+
+    /**
      * @param string $groupName
      *
      * @return Action[]
@@ -208,6 +249,7 @@ class Grid
         return $this->getActionGroup($groupName)->getActions();
     }
 
+
     /**
      * @param string $name
      *
@@ -216,6 +258,16 @@ class Grid
     public function hasActionGroup($name)
     {
         return array_key_exists($name, $this->actionGroups);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasBatchAction($name)
+    {
+        return array_key_exists($name, $this->batchActions);
     }
 
     /**

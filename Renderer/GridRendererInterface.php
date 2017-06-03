@@ -47,6 +47,14 @@ interface GridRendererInterface
 
     /**
      * @param GridView $gridView
+     * @param mixed|null $data
+     *
+     * @return mixed
+     */
+    public function renderBatchActions(GridView $gridView, $data = null);
+
+    /**
+     * @param GridView $gridView
      * @param Filter $filter
      *
      * @return mixed
