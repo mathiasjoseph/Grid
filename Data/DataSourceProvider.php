@@ -11,24 +11,24 @@
 
 namespace Miky\Component\Grid\Data;
 
+use Miky\Bundle\GridBundle\Doctrine\ORM\Driver;
 use Miky\Component\Grid\Definition\Grid;
 use Miky\Component\Grid\Parameters;
-use Miky\Component\Registry\ServiceRegistryInterface;
 
 
 class DataSourceProvider implements DataSourceProviderInterface
 {
     /**
-     * @var ServiceRegistryInterface
+     * @var Driver
      */
-    private $driversRegistry;
+    private $driver;
 
     /**
-     * @param ServiceRegistryInterface $driversRegistry
+     * @param Driver
      */
-    public function __construct(ServiceRegistryInterface $driversRegistry)
+    public function __construct(Driver $driver)
     {
-        $this->driversRegistry = $driversRegistry;
+        $this->driver= $driver;
     }
 
     /**
@@ -36,15 +36,7 @@ class DataSourceProvider implements DataSourceProviderInterface
      */
     public function getDataSource(Grid $grid, Parameters $parameters)
     {
-        $driverName = $grid->getDriver();
 
-        if (!$this->driversRegistry->has($driverName)) {
-            throw new UnsupportedDriverException($driverName);
-        }
-
-        /** @var DriverInterface $driver */
-        $driver = $this->driversRegistry->get($driverName);
-
-        return $driver->getDataSource($grid->getDriverConfiguration(), $parameters);
+        return $this->driver->getDataSource($grid->getDriverConfiguration(), $parameters);
     }
 }

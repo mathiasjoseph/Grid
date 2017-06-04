@@ -18,10 +18,6 @@ class Grid
      */
     private $code;
 
-    /**
-     * @var string
-     */
-    private $driver;
 
     /**
      * @var array
@@ -55,26 +51,23 @@ class Grid
 
     /**
      * @param string $code
-     * @param string $driver
      * @param array $driverConfiguration
      */
-    private function __construct($code, $driver, array $driverConfiguration)
+    private function __construct($code, array $driverConfiguration)
     {
         $this->code = $code;
-        $this->driver = $driver;
         $this->driverConfiguration = $driverConfiguration;
     }
 
     /**
      * @param string $code
-     * @param string $driver
      * @param array $driverConfiguration
      *
      * @return Grid
      */
-    public static function fromCodeAndDriverConfiguration($code, $driver, array $driverConfiguration)
+    public static function fromCodeAndDriverConfiguration($code, array $driverConfiguration)
     {
-        return new Grid($code, $driver, $driverConfiguration);
+        return new Grid($code, $driverConfiguration);
     }
 
     /**
@@ -83,14 +76,6 @@ class Grid
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDriver()
-    {
-        return $this->driver;
     }
 
     /**
