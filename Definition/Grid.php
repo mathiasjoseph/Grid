@@ -18,6 +18,11 @@ class Grid
      */
     private $code;
 
+    /**
+     * @var string
+     */
+    private $resourceAlias;
+
 
     /**
      * @var array
@@ -53,9 +58,10 @@ class Grid
      * @param string $code
      * @param array $driverConfiguration
      */
-    private function __construct($code, array $driverConfiguration)
+    private function __construct($code, $resourceAlias, array $driverConfiguration)
     {
         $this->code = $code;
+        $this->resourceAlias = $resourceAlias;
         $this->driverConfiguration = $driverConfiguration;
     }
 
@@ -65,9 +71,9 @@ class Grid
      *
      * @return Grid
      */
-    public static function fromCodeAndDriverConfiguration($code, array $driverConfiguration)
+    public static function fromCodeAndDriverConfiguration($code, $resourceAlias, array $driverConfiguration)
     {
-        return new Grid($code, $driverConfiguration);
+        return new Grid($code, $resourceAlias, $driverConfiguration);
     }
 
     /**
@@ -298,4 +304,14 @@ class Grid
     {
         return array_key_exists($name, $this->filters);
     }
+
+    /**
+     * @return string
+     */
+    public function getResourceAlias()
+    {
+        return $this->resourceAlias;
+    }
+
+
 }

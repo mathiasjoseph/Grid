@@ -11,6 +11,7 @@
 
 namespace Miky\Component\Grid\Data;
 
+use Miky\Component\Grid\Definition\Grid;
 use Miky\Component\Grid\Parameters;
 
 
@@ -22,5 +23,5 @@ interface DriverInterface
      *
      * @return DataSourceInterface
      */
-    public function getDataSource(array $configuration, Parameters $parameters);
+    public function getDataSource(Grid $grid, Parameters $parameters);
 }

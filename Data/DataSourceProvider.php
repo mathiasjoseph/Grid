@@ -37,6 +37,6 @@ class DataSourceProvider implements DataSourceProviderInterface
     public function getDataSource(Grid $grid, Parameters $parameters)
     {
 
-        return $this->driver->getDataSource($grid->getDriverConfiguration(), $parameters);
+        return $this->driver->getDataSource($grid, $parameters);
     }
 }

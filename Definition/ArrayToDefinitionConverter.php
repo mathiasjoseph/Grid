@@ -19,7 +19,7 @@ class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
      */
     public function convert($code, array $configuration)
     {
-        $grid = Grid::fromCodeAndDriverConfiguration($code, $configuration['driver']['options']);
+        $grid = Grid::fromCodeAndDriverConfiguration($code, $configuration['resource'], $configuration['driver']['options']);
 
         if (array_key_exists('sorting', $configuration)) {
             $grid->setSorting($configuration['sorting']);
