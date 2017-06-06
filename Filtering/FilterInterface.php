@@ -16,6 +16,9 @@ use Miky\Component\Grid\Data\DataSourceInterface;
 
 interface FilterInterface
 {
+
+    public function getFormClass();
+
     /**
      * @param DataSourceInterface $dataSource
      * @param string $name

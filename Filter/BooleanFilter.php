@@ -36,6 +36,10 @@ class BooleanFilter implements FilterInterface
         $dataSource->restrict($dataSource->getExpressionBuilder()->equals($field, $data));
     }
 
+    public function getFormClass(){
+        return 'Miky\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType';
+    }
+
     /**
      * {@inheritdoc}
      */

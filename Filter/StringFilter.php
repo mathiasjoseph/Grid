@@ -64,6 +64,10 @@ class StringFilter implements FilterInterface
         $dataSource->restrict($expressionBuilder->orX(...$expressions));
     }
 
+    public function getFormClass(){
+        return 'Miky\Bundle\GridBundle\Form\Type\Filter\StringFilterType';
+    }
+
     /**
      * @param ExpressionBuilderInterface $expressionBuilder
      * @param string $type
