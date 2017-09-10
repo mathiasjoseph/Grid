@@ -25,15 +25,16 @@ class BooleanFilter implements FilterInterface
      */
     public function apply(DataSourceInterface $dataSource, $name, $data, array $options)
     {
+
         if (empty($data)) {
             return;
         }
 
         $field = isset($options['field']) ? $options['field'] : $name;
 
-        $data = self::TRUE === $data;
+        $data["value"] = self::TRUE === $data["value"];
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->equals($field, $data));
+        $dataSource->restrict($dataSource->getExpressionBuilder()->equals($field, $data["value"]));
     }
 
     public function getFormClass(){
